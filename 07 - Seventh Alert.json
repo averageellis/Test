@@ -1,0 +1,92 @@
+﻿{
+    "$schema":  "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion":  "1.0.0.0",
+    "parameters":  {
+                       "workspace":  {
+                                         "type":  "String"
+                                     }
+                   },
+    "resources":  [
+                      {
+                          "id":  "[concat(resourceId(\u0027Microsoft.OperationalInsights/workspaces/providers\u0027, parameters(\u0027workspace\u0027), \u0027Microsoft.SecurityInsights\u0027),\u0027/alertRules/7aa6aa0e-662e-4378-a883-9994347422f8\u0027)]",
+                          "name":  "[concat(parameters(\u0027workspace\u0027),\u0027/Microsoft.SecurityInsights/7aa6aa0e-662e-4378-a883-9994347422f8\u0027)]",
+                          "type":  "Microsoft.OperationalInsights/workspaces/providers/alertRules",
+                          "kind":  "Scheduled",
+                          "apiVersion":  "2023-12-01-preview",
+                          "properties":  {
+                                             "displayName":  "07 - Seventh Alert",
+                                             "description":  "Description Edit after workflow name change6",
+                                             "severity":  "Medium",
+                                             "enabled":  true,
+                                             "query":  "let test = union SecurityEvent, SigninLogs\r\n| where TimeGenerated \u003e ago(1d) and (EventID == 4624 or EventID == 4625 or OperationName == \"Sign-in activity\")\r\n|join kind=inner (SecurityEvent | where TimeGenerated \u003e ago(1d) and EventID == 4624) on $left.TargetUserName == $right.TargetUserName\r\n| extend test = \u0027test\u0027\r\n|extend test2 = \"test5\";\r\nEmailEvents\r\n| limit 10\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+                                             "queryFrequency":  "PT2H",
+                                             "queryPeriod":  "P14D",
+                                             "triggerOperator":  "GreaterThan",
+                                             "triggerThreshold":  0,
+                                             "suppressionDuration":  "PT5H",
+                                             "suppressionEnabled":  false,
+                                             "startTimeUtc":  null,
+                                             "tactics":  [
+                                                             "Reconnaissance",
+                                                             "LateralMovement"
+                                                         ],
+                                             "techniques":  [
+                                                                "T1591",
+                                                                "T1592",
+                                                                "T0886",
+                                                                "T0867"
+                                                            ],
+                                             "subTechniques":  [
+
+                                                               ],
+                                             "alertRuleTemplateName":  null,
+                                             "incidentConfiguration":  {
+                                                                           "createIncident":  true,
+                                                                           "groupingConfiguration":  {
+                                                                                                         "enabled":  true,
+                                                                                                         "reopenClosedIncident":  false,
+                                                                                                         "lookbackDuration":  "PT5H",
+                                                                                                         "matchingMethod":  "AllEntities",
+                                                                                                         "groupByEntities":  [
+
+                                                                                                                             ],
+                                                                                                         "groupByAlertDetails":  [
+
+                                                                                                                                 ],
+                                                                                                         "groupByCustomDetails":  [
+
+                                                                                                                                  ]
+                                                                                                     }
+                                                                       },
+                                             "eventGroupingSettings":  {
+                                                                           "aggregationKind":  "SingleAlert"
+                                                                       },
+                                             "alertDetailsOverride":  {
+                                                                          "alertDisplayNameFormat":  "Test Alert from ",
+                                                                          "alertDynamicProperties":  [
+
+                                                                                                     ]
+                                                                      },
+                                             "customDetails":  null,
+                                             "entityMappings":  null,
+                                             "sentinelEntitiesMappings":  null,
+                                             "templateVersion":  null
+                                         }
+                      }
+                  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
